@@ -38,6 +38,7 @@ class CategoryController extends Controller
        $data = $request -> all();
        $category = new Category();
        $category -> title =$data['title'];
+       $category -> slug =$data['slug'];
        $category -> description = $data['description'];
        $category -> status = $data['status'];
        $category -> save();
@@ -63,7 +64,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        $list = Category::all();
+        return view('admincp.category.form',compact('list','category'));
     }
 
     /**
@@ -75,7 +78,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request -> all();
+       $category = Category::find($id);
+       $category -> title =$data['title'];
+       $category -> slug =$data['slug'];
+       $category -> description = $data['description'];
+       $category -> status = $data['status'];
+       $category -> save();
+       return Redirect::back();
     }
 
     /**
@@ -86,6 +96,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::find($id)->delete();
+         return Redirect::back();
     }
 }

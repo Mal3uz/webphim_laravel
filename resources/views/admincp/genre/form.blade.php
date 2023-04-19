@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Danh muc quan li </div>
+                <div class="card-header">Danh muc the loai </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,31 +14,31 @@
                     </div>
                     @endif
                     
-                    @if(!isset($category))
-                    {!! Form::open(['route' => 'category.store','method' => 'POST']) !!}
+                    @if(!isset($genre))
+                    {!! Form::open(['route' => 'genre.store','method' => 'POST']) !!}
                     @else
-                     {!! Form::open(['route' => ['category.update',$category -> id],'method' => 'PUT']) !!}
+                     {!! Form::open(['route' => ['genre.update',$genre -> id],'method' => 'PUT']) !!}
                     @endif
                     <div class="form-group">
                         {!! Form::label('title','Title', []) !!}
-                        {!! Form::text('title',isset($category) ? $category -> title : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'slug','onkeyup' =>'ChangeToSlug()']) !!}
+                        {!! Form::text('title',isset($genre) ? $genre -> title : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'slug','onkeyup' =>'ChangeToSlug()']) !!}
                     </div>
 
                      <div class="form-group">
                         {!! Form::label('slug','Slug', []) !!}
-                        {!! Form::text('slug',isset($category) ? $category -> slug : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'convert_slug']) !!}
+                        {!! Form::text('slug',isset($genre) ? $genre -> slug : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'convert_slug']) !!}
                     </div>
 
                     <div class="form-group">
                         {!! Form::label('description','Description', []) !!}
-                        {!! Form::textarea('description',isset($category) ? $category -> description : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'description']) !!}
+                        {!! Form::textarea('description',isset($genre) ? $genre -> description : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'description']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Active','Active', []) !!}
-                        {!! Form::select('status', ['1' => 'hien thi' , '0' => 'khong hien thi'],isset($category) ? $category -> status : '', ['class' =>
+                        {!! Form::select('status', ['1' => 'hien thi' , '0' => 'khong hien thi'],isset($genre) ? $genre -> status : '', ['class' =>
                         'mb-3 form-control']) !!}
                     </div>
-                    @if(!isset($category))
+                    @if(!isset($genre))
                     {!! Form::submit("them du lieu", ['class' => 'btn btn-success']) !!}
                     @else
                     {!! Form::submit("cap nhat", ['class' => 'btn btn-success']) !!}
@@ -76,11 +76,11 @@
                         </td>
                         <td>
 
-                            {!! Form::open(['method' => 'DELETE','route' => ['category.destroy',$cate ->id],'onsubmit'
+                            {!! Form::open(['method' => 'DELETE','route' => ['genre.destroy',$cate ->id],'onsubmit'
                             => 'return confirm("Xoa hay khong ?")']) !!}
                             {!! Form::submit("Xoa", ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
-                             <a href="{{route('category.edit',$cate -> id)}} " class="btn btn-warning">Sua</a>
+                             <a href="{{route('genre.edit',$cate -> id)}} " class="btn btn-warning">Sua</a>
                         </td>
                     </tr>
                     @endforeach
