@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     <!-- Fonts -->
@@ -18,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 <body>
@@ -88,9 +89,8 @@
     </div>
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-</body>
-
-<script type="text/javascript">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript">
  
     function ChangeToSlug()
         {
@@ -126,5 +126,30 @@
         }
 
     </script>
+     <script type="text/javascript">
+        $('.order_position').sortable({
+           placeholder: 'ui-state-highlight',
+           update:function(event,ui){
+              var array_id =[];
+              $('.order_position tr').each(function(){
+                    array_id.push($(this).attr('id'));
+              })
+
+             $.ajax({
+                  headers:{
+                    'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                  },
+                  url:"{{route('resorting')}}",
+                  method:"POST",
+                  data:{array_id:array_id},
+                  success:function(data){
+                    alert("sap xep thanh cong");
+                  }
+             })
+           }
+        })
+    </script>
+</body>
+   
 
 </html>

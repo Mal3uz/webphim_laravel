@@ -12,6 +12,6 @@ class Category extends Model
     use HasFactory;
 
     public function movie(){
-        return $this->hasMany(Movie::class);
+        return $this->hasMany(Movie::class)->orderBy('id','DESC');
     }
 }

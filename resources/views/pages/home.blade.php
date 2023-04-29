@@ -51,16 +51,16 @@
               
               
                   <div id="halim-advanced-widget-2-ajax-box" class="halim_box">
-                      @foreach($cate_home as $key => $mov)
+                      @foreach($cate_home ->movie ->take(12) as $key => $mov)
                      <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                         <div class="halim-item">
                            <a class="halim-thumb" href="chitiet.php">
-                              <figure><img class="lazy img-responsive" src="https://image.bongngocdn.com/upload/poster-loki-marvel-2021.jpg" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO"></figure>
+                              <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$mov->image)}}" alt="BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO" title="{{$mov->title}}"></figure>
                               <span class="status">TẬP 15</span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>Vietsub</span> 
                               <div class="icon_overlay"></div>
                               <div class="halim-post-title-box">
                                  <div class="halim-post-title ">
-                                    <p class="entry-title">BẠN CÙNG PHÒNG CỦA TÔI LÀ GUMIHO</p>
+                                    <p class="entry-title">{{$mov->title}}</p>
                                     <p class="original_title">My Roommate Is a Gumiho</p>
                                  </div>
                               </div>

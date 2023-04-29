@@ -86,7 +86,7 @@
                         <th scope="col">Manage</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     @foreach($list as $key => $cate)
                     <tr>
                         <th scope="row">{{$key}}</th>
