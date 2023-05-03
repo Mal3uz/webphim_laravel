@@ -5,8 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
+                <a href="{{route('movie.index')}}" class="btn btn-primary">Liệt Kê Phim</a>
                 <div class="card-header">Quan li phim </div>
-
+           
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -22,6 +23,10 @@
                     <div class="form-group">
                         {!! Form::label('title','Title', []) !!}
                         {!! Form::text('title',isset($movie) ? $movie -> title : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ,'id' =>'slug','onkeyup' =>'ChangeToSlug()']) !!}
+                    </div>
+                     <div class="form-group">
+                        {!! Form::label('Tên gốc','Tên gốc', []) !!}
+                        {!! Form::text('name_origin',isset($movie) ? $movie -> name_origin : '', ['class' => 'mb-3 form-control' , 'placeholder' => 'nhap vao du lieu' ]) !!}
                     </div>
 
                      <div class="form-group">
@@ -49,6 +54,11 @@
                         'mb-3 form-control']) !!}
                     </div>
                      <div class="form-group">
+                        {!! Form::label('Hot','Hot', []) !!}
+                        {!! Form::select('phim_hot',['1' => 'Co' , '0' => 'Khong'],isset($movie) ? $movie -> phim_hot : '', ['class' =>
+                        'mb-3 form-control']) !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::label('Genre','Genre', []) !!}
                         {!! Form::select('genre_id',$genre,isset($movie) ? $movie -> genre : '', ['class' =>
                         'mb-3 form-control']) !!}
@@ -70,53 +80,6 @@
                 </div>
             </div>
 
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Slug</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Active\Inactive</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Manage</th>
-                    </tr>
-                </thead>
-                <tbody >
-                    @foreach($list as $key => $cate)
-                    <tr>
-                        <th scope="row">{{$key}}</th>
-                        <td>{{$cate -> title}}</td>
-                         <td>{{$cate -> slug}}</td>
-                         <td><image width="100%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
-                        <td>{{$cate -> description}}</td>
-                        <td>
-                            @if($cate -> status)
-                            Hien thi
-                            @else
-                            Khong hien thi
-                            @endif
-
-                        </td>
-                        <td>{{$cate->category->title}}</td>
-                        <td>{{$cate->country->title}}</td>
-                        <td>{{$cate->genre->title}}</td>
-                        <td>
-
-                            {!! Form::open(['method' => 'DELETE','route' => ['movie.destroy',$cate ->id],'onsubmit'
-                            => 'return confirm("Xoa hay khong ?")']) !!}
-                            {!! Form::submit("Xoa", ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
-                             <a href="{{route('movie.edit',$cate -> id)}} " class="btn btn-warning">Sua</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
 
         </div>
     </div>

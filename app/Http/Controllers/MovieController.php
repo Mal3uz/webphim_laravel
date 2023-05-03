@@ -17,7 +17,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $list = Movie::with('category','genre','country')->orderBy('id','DESC')->get();
+        return view('admincp.movie.index',compact('list'));
     }
 
     /**
@@ -31,8 +32,8 @@ class MovieController extends Controller
         $country= Country::pluck('title','id');
         $genre= Genre::pluck('title','id');
         $movie = null;
-        $list = Movie::with('category','genre','country')->orderBy('id','DESC')->get();
-        return view('admincp.movie.form',compact('list','category','country','genre','movie'));
+       
+        return view('admincp.movie.form',compact('category','country','genre','movie'));
     }
 
     /**
@@ -45,7 +46,9 @@ class MovieController extends Controller
     $data = $request->all();
     $movie = new Movie();
     $movie->title = $data['title'];
+    $movie->name_origin = $data['name_origin'];
     $movie->slug = $data['slug'];
+    $movie->phim_hot = $data['phim_hot'];
     $movie->description = $data['description'];
     $movie->status = $data['status'];
     $movie->category_id = $data['category_id'];
@@ -94,9 +97,9 @@ class MovieController extends Controller
          $category= Category::pluck('title','id');
         $country= Country::pluck('title','id');
         $genre= Genre::pluck('title','id');
-       $list = Movie::with('category','genre','country')->orderBy('id','DESC')->get();
+
         $movie = Movie::find($id);
-        return view('admincp.movie.form',compact('list','category','country','genre','movie'));
+        return view('admincp.movie.form',compact('category','country','genre','movie'));
     }
 
     /**
@@ -112,6 +115,7 @@ class MovieController extends Controller
     $movie = Movie::find($id);
     $movie->title = $data['title'];
     $movie->slug = $data['slug'];
+    $movie->phim_hot = $data['phim_hot'];
     $movie->description = $data['description'];
     $movie->status = $data['status'];
     $movie->category_id = $data['category_id'];
